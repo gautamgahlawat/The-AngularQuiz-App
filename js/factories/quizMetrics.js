@@ -26,10 +26,12 @@
         .module("turtleFacts")
         .factory("quizMetrics", QuizMetrics);
 
+        quizMetrics.$inject = ['DataService']; 
+
         /*
          * function definition for the factory
          */
-        function QuizMetrics(){
+        function QuizMetrics(DataService){
 
             /*
              * quizObj is an object that will hold all of the above mentioned 
@@ -43,6 +45,9 @@
                 quizActive: false,
                 resultsActive: false,
                 changeState: changeState, // changeState is a named function below
+                correctAnswers: [],
+                markQuiz: markQuiz,
+                numCorrect: 0,
             };
 
             /*
@@ -55,7 +60,6 @@
 
             /*
              * Function to change the state of either the quiz or the results.
-             *
              * It accepts two arguments, one is which metric to change (quiz or
              * results) and the other is what to change the state too.
              */
@@ -66,6 +70,18 @@
                     quizObj.resultsActive = state;
                 }else{
                     return false;
+                }
+            }
+
+            function markQuiz(){
+                quizObj.correctAnswers = DataService.correctAnswers;
+                for(var i =0;i<DataService.quizQuestions.length; i++){
+                    if(DataService.quizQuestions[i].selected === DataService.correctAnswers[i]){
+                        DataService.quizQuestions[i].correct = true;
+                        quizObj.numCorrect++;
+                    }else{
+                        dataService.quizQuestions[i].correct = false;
+                    }
                 }
             }
 

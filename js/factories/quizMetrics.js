@@ -26,7 +26,11 @@
         .module("turtleFacts")
         .factory("quizMetrics", QuizMetrics);
 
-        quizMetrics.$inject = ['DataService']; 
+        /*
+         * dependency injection as seen in all the controllers. See comments 
+         * there for a deeper explaination of dependency injection
+         */
+        QuizMetrics.$inject = ['DataService'];
 
         /*
          * function definition for the factory
@@ -46,8 +50,8 @@
                 resultsActive: false,
                 changeState: changeState, // changeState is a named function below
                 correctAnswers: [],
-                markQuiz: markQuiz,
-                numCorrect: 0,
+                markQuiz: markQuiz, // markQuiz is a named function below
+                numCorrect: 0
             };
 
             /*
@@ -60,6 +64,7 @@
 
             /*
              * Function to change the state of either the quiz or the results.
+             *
              * It accepts two arguments, one is which metric to change (quiz or
              * results) and the other is what to change the state too.
              */
@@ -73,14 +78,21 @@
                 }
             }
 
+            /*
+             * When called, the markQuiz method will loop through all the users
+             * answers and compare them to the know correct answers to each
+             * question. The total number of correct answers by the user is 
+             * calculated and saved in the numCorrect property of the quizObj 
+             * object
+             */
             function markQuiz(){
                 quizObj.correctAnswers = DataService.correctAnswers;
-                for(var i =0;i<DataService.quizQuestions.length; i++){
+                for(var i = 0; i < DataService.quizQuestions.length; i++){
                     if(DataService.quizQuestions[i].selected === DataService.correctAnswers[i]){
                         DataService.quizQuestions[i].correct = true;
                         quizObj.numCorrect++;
                     }else{
-                        dataService.quizQuestions[i].correct = false;
+                        DataService.quizQuestions[i].correct = false;
                     }
                 }
             }

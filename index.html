@@ -22,7 +22,7 @@
             </h3>
         </div>
         <!-- Hook on the controller for this view and specify when to show it using ng-hide -->
-        <div ng-controller="listCtrl as list" ng-hide="list.quizMetrics.quizActive">
+        <div ng-controller="listCtrl as list" ng-hide="list.quizMetrics.quizActive || list.quizMetrics.resultsActive">
             <!-- top search bar with start quiz button using bootstrap -->
             <form class="form-inline well well-sm clearfix">
                 <span class="glyphicon glyphicon-search"></span>
@@ -216,7 +216,9 @@
             </div><!-- question row -->
         </div><!-- quiz controller -->
 
-
+        <div ng-controller="resultsCtrl as results" ng-show= "results.quizMetrics.resultsActive">
+            <h1> hello world!!</h1>
+        </div>
 
     </div>
 
@@ -229,6 +231,7 @@
     <script src="js/app.js"></script>
     <script src="js/controllers/list.js"></script>
     <script src="js/controllers/quiz.js"></script>
+    <script src="js/controllers/results.js"></script>
     <script src="js/factories/quizMetrics.js"></script>
     <script src="js/factories/dataservice.js"></script>
 

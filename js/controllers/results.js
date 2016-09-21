@@ -3,12 +3,13 @@
 		.module("turtleFacts")
 		.controller("resultsCtrl", ResultsController);
 
-		ResultsController.$inject = ['quizMetrics'];
+		ResultsController.$inject = ['quizMetrics', 'DataService'];
 
-		function ResultsController(quizMetrics){
+		function ResultsController(quizMetrics, DataService){
 			var vm = this;
 
 			vm.quizMetrics = quizMetrics;
-		}
+			vm.dataService = DataService;
+		}	
 
 })();

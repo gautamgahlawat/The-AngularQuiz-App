@@ -198,6 +198,9 @@
                     <button class="btn btn-warning" ng-click="quiz.questionAnswered()">Continue</button>
                 </div>
 
+                <button class= "btn btn-primary btn-lg"
+                ng-click="quiz.reset()">GO Back To Facts</button>
+
                 <!-- this section is the prompt to be show when the user finishes the quiz to ensure they want to continue -->
                 <!-- it only shows when the finalise flag is true -->
                 <!-- clicking yes will call the finaliseAnswers method which will send the user to the results page -->
@@ -294,9 +297,9 @@
             </div>
 
 
+            <button class= "btn btn-primary btn-lg"
+                ng-click="results.reset()">GO Back To Facts</button>
         </div>
-
-
 
     </div>
 

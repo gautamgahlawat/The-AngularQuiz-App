@@ -50,6 +50,7 @@
         vm.activeQuestion = 0; // currently active question in the quiz
         vm.error = false; // error flag. Will be set when user tries to finish quiz with 
         vm.finalise = false; // finalise flag. Will be set to show prompt to end quiz with
+        vm.reset = reset;
                              // all questions answered
 
         var numQuestionsAnswered = 0; // This is not needed by the view so is only declared using var
@@ -66,6 +67,19 @@
          * If an argument is passed into the function then it will simply set
          * the activeQuestion to the number that was passed in as an argument
          */
+
+         function reset(){
+                quizMetrics.changeState("quiz",false);
+                quizMetrics.numCorrect = 0;
+                for(var i=0; i < DataService.quizQuestions.length; i++){
+                    var data = DataService.quizQuestions[i];
+
+                    data.selected = null;
+                    data.correct = null;
+                }
+            }
+
+
         function setActiveQuestion(index){
             // no argument passed, data = undefined.
             if(index === undefined){
